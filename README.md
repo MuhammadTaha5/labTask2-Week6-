@@ -61,63 +61,26 @@ To make searching easier and more flexible, I implemented a **hybrid fuzzy searc
 
 This hybrid approach makes the search experience more natural, similar to how humans search even when not using exact spelling.
 
+Here is a **short, clean, submission-ready README** exactly as you asked:
+
+---
+
 # **Task 2: Reverse Image Search**
 
-This task focused on implementing a reverse image search system.
-Two different approaches were used:
+For this task, I implemented **two approaches**:
 
-1. **Approach 1:** Sir’s provided method (CNN-based embeddings)
-2. **Approach 2:** A more advanced Vision Transformer model (BiT/BViT) implemented with help of an AI tool
+## **1. Sir’s Given Approach (Baseline)**
 
-Both approaches extract image embeddings and compare them to find visually similar images.
+* Used the provided starter code.
+* Extracted embeddings using **ResNet50** (ImageNet) with a fallback **HSV color histogram**.
+* Stored results in a **parquet file**.
+* Performed similarity search using **NumPy cosine similarity**.
+* Displayed the query image and **Top-K similar images** in a grid.
+* This method gives decent matches and is good for understanding the pipeline.
 
----
+## **2. BViT / ViT Approach (My Second Method)**
 
-## **1. Approach 1 – Using the Provided Code (CNN-Based Embeddings)**
-
-In the first method, I followed the exact code and instructions provided by Sir.
-The idea was to:
-
-* Use a **pretrained CNN model** to generate image embeddings
-* Convert each image into a 1D feature vector
-* Store all embeddings
-* Compute similarity using **cosine similarity**
-* Return the most similar images based on the computed distance
-
-### How it works:
-
-1. Load the pretrained CNN (e.g., ResNet or similar)
-2. For each image → generate a feature vector
-3. For the query image → generate its embedding
-4. Compare the query embedding with the dataset embeddings
-5. The images with the smallest distance (or highest similarity) are returned
-
-This method is simpler and fast but depends heavily on the CNN used.
-
----
-
-## **2. Approach 2 – Using BViT / BiT (Transformer-Based Model)**
-
-The second approach used a more modern model:
-**BViT (Big Vision Transformer)** / **BiT (Big Transfer model)**.
-
-This approach was implemented using help from an AI tool to correctly set up the code, load the model, and generate embeddings.
-
-### Why this approach is better:
-
-* Vision Transformers capture **global image features**
-* Embeddings are generally more robust
-* Performance is usually better for reverse image search
-* More accurate similarity results
-
-### Steps followed:
-
-1. Load a pretrained ViT/BiT model
-2. Preprocess all images according to the model's requirements
-3. Extract embeddings for every image
-4. Store the embeddings
-5. Compute similarity between query image and dataset images
-6. Return the top-K closest matches
-
-This approach gave **more accurate and visually meaningful results** compared to the simple CNN method.
-
+* Implemented a **Vision Transformer (BViT / ViT)**–based encoder with help from an AI tool.
+* Extracted stronger transformer-based embeddings.
+* Performed the same cosine similarity search.
+* This approach gives **much better semantic similarity** than ResNet50 or histograms.
